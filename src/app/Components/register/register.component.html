@@ -27,7 +27,7 @@
                             <form [formGroup]="register" (ngSubmit)="submit()">
                                 <div class="form-group">
                                     <label>User Name *</label>
-                                    <input type="text" class="form-control" formControlName="username" [ngClass]="{'invalid-field': formSubmitted || register.get(['username']).hasError('required')}">
+                                    <input type="text" class="form-control" formControlName="username" [ngClass]="{'invalid-field': formSubmitted && register.get(['username']).hasError('required')}">
                                     <div class="invalid-feedback" tooltip="Please Enter username" *ngIf="formSubmitted && f.username.errors.required">
                                         Please Enter User Name
                                     </div>
@@ -35,7 +35,7 @@
 
                                 <div class="form-group">
                                     <label>Your email address *</label>
-                                    <input type="email" class="form-control" formControlName="email" [ngClass]="{'invalid-field': formSubmitted || register.get(['email']).hasError('required')}">
+                                    <input type="email" class="form-control" formControlName="email" [ngClass]="{'invalid-field': formSubmitted && register.get(['email']).hasError('required')}">
                                     <div class="invalid-feedback" tooltip="Please Enter email" *ngIf="formSubmitted && f.email.errors.required">
                                         Please Enter Email
                                     </div>
