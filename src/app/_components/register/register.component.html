@@ -24,37 +24,40 @@
 
                         <!-- .End .tab-pane -->
                         <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
-                            <form [formGroup]="register" (ngSubmit)="submit()">
+                            <form [formGroup]="register" (ngSubmit)="submit()" (blur)="logValidationErrors()">
                                 <div class="form-group">
                                     <label>User Name *</label>
-                                    <input type="text" class="form-control" formControlName="username" [ngClass]="{'invalid-field': formSubmitted && register.get(['username']).hasError('required')}">
-                                    <div class="invalid-feedback" tooltip="Please Enter username" *ngIf="formSubmitted && f.username.errors.required">
-                                        Please Enter User Name
-                                    </div>
+                                    <input type="text" class="form-control" formControlName="username" (blur)="logValidationErrors()">
+                                    <span class="text-danger" *ngIf="formErrors.username">
+                                      {{formErrors.username}}
+                                    </span>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Your email address *</label>
-                                    <input type="email" class="form-control" formControlName="email" [ngClass]="{'invalid-field': formSubmitted && register.get(['email']).hasError('required')}">
-                                    <div class="invalid-feedback" tooltip="Please Enter email" *ngIf="formSubmitted && f.email.errors.required">
-                                        Please Enter Email
-                                    </div>
+                                    <input type="email" class="form-control" formControlName="email" (blur)="logValidationErrors()">
+                                    <span class="text-danger" *ngIf="formErrors.email">
+                                      {{formErrors.email}}
+                                    </span>
                                 </div>
                                 <!-- End .form-group -->
 
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="password" class="form-control" formControlName="password" [ngClass]="{'invalid-field': formSubmitted && register.get(['password']).hasError('required')}">
-                                    <div class="invalid-feedback" tooltip="Please Enter password" *ngIf="formSubmitted && f.password.errors.required">
-                                        Please Enter Password
-                                    </div>
+                                    <input type="password" class="form-control" formControlName="password" (blur)="logValidationErrors()">
+                                    <span class="text-danger" *ngIf="formErrors.password">
+                                        {{formErrors.password}}
+                                        </span>
+                                    <!-- <div class="invalid-feedback" tooltip="Please Enter password" *ngIf="formSubmitted && f.password.errors && f.password.errors.minlength">
+                                        Password must be at least 6 characters
+                                    </div> -->
                                 </div>
                                 <div class="form-group">
                                     <label>Confrim Password *</label>
-                                    <input type="password" class="form-control" formControlName="confrimpassword" [ngClass]="{'invalid-field': formSubmitted && register.get(['confrimpassword']).hasError('required')}">
-                                    <div class="invalid-feedback" tooltip="Please Enter confrimpassword" *ngIf="formSubmitted && f.confrimpassword.errors.required">
-                                        Please Enter Confrim Password
-                                    </div>
+                                    <input type="confrimpassword" class="form-control" formControlName="confrimpassword" (blur)="logValidationErrors()">
+                                    <span class="text-danger" *ngIf="formErrors.confrimpassword">
+                                      {{formErrors.confrimpassword}}
+                                    </span>
                                 </div>
                                 <!-- End .form-group -->
 

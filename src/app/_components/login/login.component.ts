@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserdetailsService } from '../../../services/userdetails.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
   login: FormGroup;
   formSubmitted = false;
-  constructor() { }
+  constructor(private userdetailsService: UserdetailsService) { }
 
   ngOnInit(): void {
     this.login = new FormGroup({
@@ -22,8 +23,19 @@ export class LoginComponent implements OnInit {
   submit(): void{
     this.formSubmitted = true;
     if (this.login.valid) {
-      console.log(this.login, 'sdfsdf');
+      const payload = {
+        // username: 'suppu',
+        // email: 'jithender@yopmail.com',
+        // password: 'admin'
+        username: this.login.get('username').value,
+        password: this.login.get('password').value,
+      };
+      this.userdetailsService.getLogin(payload).subscribe(res => {
+       alert('login Successfully');
+       this.login.reset();
+      }, (err) => {
+        alert('login Unsuccessfully');
+      });
     }
   }
-
 }

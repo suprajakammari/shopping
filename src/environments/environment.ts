@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseURL: 'http://localhost:8088/api/auth',
+  apiSearchBaseURL: 'http://localhost:8088/api/auth',
+  crowdriffBaseURL: 'http://localhost:8088/api/auth',
 };
 
 /*
