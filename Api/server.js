@@ -50,7 +50,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 const Role = db.role;
-const Brand = db.brand;
 const User = db.user;
 
 db.mongoose
@@ -77,6 +76,7 @@ app.use(function (req, res, next) {
 });
 // routes
 require("./app/routes/auth.routes")(app);
+require("./app/routes/products.routes")(app);
 
 
 
