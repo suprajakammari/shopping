@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserdetailsService } from '../../../services/userdetails.service';
 import * as _ from 'lodash';
 import { ValidationService } from '../../../services/validation.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -13,11 +14,13 @@ import { ValidationService } from '../../../services/validation.service';
 export class RegisterComponent implements OnInit {
   register: FormGroup;
   formSubmitted = false;
+  title = 'toaster-not';
   constructor(
     private userdetailsService: UserdetailsService,
     private router: Router,
     private fb: FormBuilder,
-    private _validation: ValidationService) { }
+    private _validation: ValidationService,
+    private notifyService: NotificationService) { }
     validationMessages = {
       username: {
         required: 'Name is required.',
@@ -67,10 +70,10 @@ export class RegisterComponent implements OnInit {
     let payload = this.register.value;
     payload = _.omit(payload, ['confrimpassword']);
     this.userdetailsService.getSignup(this.register.value).subscribe(res => {
-      alert('Registred Successfully');
+      this.notifyService.showSuccess('Register successfully');
       this.router.navigate(['/login']);
     }, (err) => {
-      alert('Register Unsuccessfully');
+      this.notifyService.showError('Register Unsuccessfully');
     });
   }
 

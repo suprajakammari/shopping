@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserdetailsService } from '../../../services/userdetails.service';
+import { Router } from '@angular/router';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { UserdetailsService } from '../../../services/userdetails.service';
 export class LoginComponent implements OnInit {
   login: FormGroup;
   formSubmitted = false;
-  constructor(private userdetailsService: UserdetailsService) { }
+  constructor(private userdetailsService: UserdetailsService, private router: Router, private notifyService: NotificationService) { }
 
   ngOnInit(): void {
     this.login = new FormGroup({
@@ -19,23 +21,16 @@ export class LoginComponent implements OnInit {
     });
 
   }
+
   get f(){ return this.login.controls; }
-  submit(): void{
+
+  submit(): any{
     this.formSubmitted = true;
-    if (this.login.valid) {
-      const payload = {
-        // username: 'suppu',
-        // email: 'jithender@yopmail.com',
-        // password: 'admin'
-        username: this.login.get('username').value,
-        password: this.login.get('password').value,
-      };
-      this.userdetailsService.getLogin(payload).subscribe(res => {
-       alert('login Successfully');
-       this.login.reset();
-      }, (err) => {
-        alert('login Unsuccessfully');
-      });
-    }
+    if (!this.login.valid) { return false; }
+    this.userdetailsService.login(this.login.value).subscribe(res => {
+      this.router.navigate(['/']);
+    }, (err) => {
+      this.notifyService.showError('login Unsuccessfully');
+    });
   }
 }

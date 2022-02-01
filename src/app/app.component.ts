@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserdetailsService } from '../services/userdetails.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Shopping';
+  currentUser: any;
+  constructor(public api: UserdetailsService) {
+    this.api.currentUserSubject.subscribe(x => this.currentUser = x);
+  }
 }
