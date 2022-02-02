@@ -14,10 +14,10 @@ export class UserdetailsService {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
   }
   getSignup(payload) {
-    return this.http.post(`http://localhost:8088/api/auth/signup`, payload);
+    return this.http.post(`${environment.api}/signin`, payload);
   }
   login(payload): Observable<any> {
-    return this.http.post(`${environment.apiBaseURL}/signin`, payload).pipe(map(user => {
+    return this.http.post(`${environment.api}/signin`, payload).pipe(map(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);

@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseURL: 'http://localhost:8088/api/auth',
-  apiSearchBaseURL: 'http://localhost:8088/api/auth',
-  crowdriffBaseURL: 'http://localhost:8088/api/auth',
+  api: 'http://localhost:8088/api',
+  auth: 'http://localhost:8088/api/auth'
 };
 
 /*
