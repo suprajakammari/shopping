@@ -1,18 +1,18 @@
 version: 0.2
 env:
   variables:
-    APP_NAME: "ecom"
+    APP_NAME: "angular-cicd-pipeline-demo"
 phases:
   install:
     runtime-versions:
-      nodejs: 13.x
+      nodejs: 14
     commands:
       - echo install process started
       - npm install && npm install -g @angular/cli
   build:
     commands:
       - echo build process started now
-      - ng build --prod
+      - ng build --configuration=production
   post_build:
     commands:
       - echo build process finished, we should uplload to S3 now
