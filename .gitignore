@@ -2,4 +2,5 @@
 # dependencies
 /node_modules
 /Api/node_modules
-/package-lock.json
+package-lock.json
+AgriSoft.pem
